@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from firebase import Firebase
-import os
+
 import json
 
 ###Set Firebase Configuration###
