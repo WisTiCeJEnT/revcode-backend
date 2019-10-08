@@ -40,8 +40,8 @@ def add_new_file(uid):
     "extension": "",
     "filename": ""
   }
-  item_id = db.child("user").child(uid).child("user_storage").push(data)
-  return item_id["name"]
+  firebase_res = db.child("user").child(uid).child("user_storage").push(data)
+  return firebase_res["name"]
 
 def save_file(uid, file_id, file_data):
   data = db.child("user").child(uid).child("user_storage").child(file_id).get().val()
@@ -49,12 +49,12 @@ def save_file(uid, file_id, file_data):
   data["extension"] = file_data["extension"]
   data["filename"] = file_data["filename"]
   data["date_edit"] = datetime.datetime.now().strftime("%d-%m-%Y")
-  item_id = db.child("user").child(uid).child("user_storage").child(file_id).set(data)
-  return item_id["name"]
+  db.child("user").child(uid).child("user_storage").child(file_id).set(data)
+  return file_id
 
 def remove_file(uid, file_id):
-  item_id = db.child("user").child(uid).child("user_storage").child(file_id).remove()
-  return item_id["name"]
+  db.child("user").child(uid).child("user_storage").child(file_id).remove()
+  return file_id
   
 
 
