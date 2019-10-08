@@ -41,7 +41,7 @@ def add_new_file(uid):
     "filename": ""
   }
   item_id = db.child("user").child(uid).child("user_storage").push(data)
-  return item_id
+  return item_id["name"]
 
 def save_file(uid, file_id, file_data):
   data = db.child("user").child(uid).child("user_storage").child(file_id).get().val()
@@ -50,11 +50,11 @@ def save_file(uid, file_id, file_data):
   data["filename"] = file_data["filename"]
   data["date_edit"] = datetime.datetime.now().strftime("%d-%m-%Y")
   item_id = db.child("user").child(uid).child("user_storage").child(file_id).set(data)
-  return item_id
+  return item_id["name"]
 
 def remove_file(uid, file_id):
   item_id = db.child("user").child(uid).child("user_storage").child(file_id).remove()
-  return item_id
+  return item_id["name"]
   
 
 
