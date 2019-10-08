@@ -33,6 +33,15 @@ def getUserData():
                             "userData": firebase_api.get_user_data(uid)})
     except:
         return jsonify({"status": "error"})
+    
+@app.route('/speech', methods=['GET', 'POST'])
+def getSpeech():
+    data = request.get_json()
+    try:
+        print(data['res'])
+    except:
+        print("error")
+    return "running"
 
 if __name__ == "__main__":
     app.run(debug = False,host="0.0.0.0", port=5000)
