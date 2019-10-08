@@ -1,0 +1,4 @@
+flask=1.1.1
+requests=2.11.1
+flask_cors=3.0.8
+pyrebase=3.0.27

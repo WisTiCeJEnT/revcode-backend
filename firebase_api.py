@@ -4,9 +4,13 @@ import os
 
 def add_new_user(uid, name):
   if(uid not in dict(db.child("user").get().val()).keys()):
-      data = {"uid": uid
-            , "name": name
-            , "inv": [0]}
+      data = {
+        "user_data": {
+          "uid": uid, 
+          "name": name
+          },
+        "user_storage": {}
+      }
       db.child("/user/").child(uid).set(data)
 
 def get_user_data(uid):
