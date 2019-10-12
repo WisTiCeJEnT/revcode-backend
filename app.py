@@ -5,6 +5,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return "Working"
+
 @app.route('/speech', methods=['GET', 'POST'])
 def getSpeech():
     data = request.get_json()
