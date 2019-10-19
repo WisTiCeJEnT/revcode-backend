@@ -1,8 +1,13 @@
 import dialogflow
 import json
+import os
 import google.protobuf  as pf
 
-def detect_intent_texts(project_id, session_id, text, language_code):
+project_id = os.getenv("DIALOGFLOW_PROJECT_ID")
+session_id = os.getenv("DIALOGFLOW_SESSION_ID")
+language_code = 'en'
+
+def detect_intent_texts(text):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
@@ -12,4 +17,4 @@ def detect_intent_texts(project_id, session_id, text, language_code):
 
     return response.query_result.intent.display_name
 
-#detect_intent_texts("newagent-bhsenq","lnwza007","วน","en")
+#print(detect_intent_texts("วน"))
