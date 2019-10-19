@@ -14,7 +14,7 @@ def detect_intent_texts(text):
     text_input = dialogflow.types.TextInput(text=text, language_code=language_code)
     query_input = dialogflow.types.QueryInput(text=text_input)
     response = session_client.detect_intent(session=session, query_input=query_input)
-
-    return response.query_result.intent.display_name
-
+    if response.query_result.intent.display_name != '':
+        return response.query_result.intent.display_name
+    return text
 #print(detect_intent_texts("วน"))
