@@ -1,7 +1,7 @@
 import deepcut
 import dialogflow_api
 import detection
-CAREFUL_WORD = [['มาก', 'กว่า'], ['น้อย', 'กว่า']]
+CAREFUL_WORD = [['มาก', 'กว่า'], ['น้อย', 'กว่า'], ['เท่า', 'กับ'], ['ตัว', 'แปร']]
 def mergecarefulword(lis):
     for j in range (len(CAREFUL_WORD)):
         i=0
