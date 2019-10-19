@@ -116,7 +116,7 @@ def tran(i, tab):
             order0=i.index('ข้อความ')
             answer+=f"('{i[order0+1]}')"
     return (answer, tab)
-
+"""
 tab=0
 listans=[]
 for i in mylist:
@@ -126,4 +126,4 @@ for i in mylist:
 for i in listans:
     if i:
         print(i)
-    
+""" 
