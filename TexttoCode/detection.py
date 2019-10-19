@@ -1,4 +1,13 @@
-mylist=[['while','asdf'],['ข้างในลูป'],['print','ข้อความ', 'x'],['for','ตัวแปร','i','ใน','ช่วง','1','ถึง','9'],['ข้างในลูป'],['print','ข้อความ','ควายกัดหมา'],['ข้างนอกลูป'],['elif','ตัวแปร','x','เท่ากับ','1'],['ข้างในลูป'],['print','ตัวแปร','x+1'],['ข้างนอกลูป'],['print','ตัวแปร', 'x'],['ประกาศ','ตัวแปร','x' ,'เท่ากับ','ตัวแปร','y','+','ตัวแปร','z','+','1']]
+mylist=[['while','asdf'],['ข้างในลูป'],['print','ข้อความ', 'x'],
+['for','ตัวแปร','i','ใน','ช่วง','1','ถึง','9'],
+['ข้างในลูป'],
+['print','ข้อความ','ควายกัดหมา'],
+['ตัวแปร','x' ,'เท่ากับ','x','*','9'],
+['ข้างนอกลูป'],['elif','ตัวแปร','x','เท่ากับ','1'],
+['ข้างในลูป'],['print','ตัวแปร','x+1'],['ข้างนอกลูป'],
+['print','ตัวแปร', 'x'],
+
+['ประกาศ','ตัวแปร','x' ,'เท่ากับ','ตัวแปร','y','+','ตัวแปร','z','+','1']]
 
 def tran(i, tab):
     if('ข้างในลูป' in i):
@@ -94,7 +103,16 @@ def tran(i, tab):
                 order1=i.index('ใน')
                 answer+=f'in {i[order1+1]}' 
         answer+=f' :'
-    if('ประกาศ' in i) : ## declar
+    if ('print' in i): ## print
+        answer+=f'print'      
+        if('ตัวแปร' in i):
+            order0=i.index('ตัวแปร')
+            answer+=f'({i[order0+1]})'
+        elif('ข้อความ' in i):
+            order0=i.index('ข้อความ')
+            answer+=f"('{i[order0+1]}')"
+   
+    if(i[0]=='ประกาศ' or i[0]=='ตัวแปร') : ## declar
         if('ตัวแปร' in i):
             order0=i.index('ตัวแปร')
             answer+=f'{i[order0+1]} = '
@@ -105,16 +123,6 @@ def tran(i, tab):
                     if(i[n]=='ตัวแปร'):
                         continue
                     answer+=f'{i[n]} '
-
-
-    if ('print' in i): ## print
-        answer+=f'print'      
-        if('ตัวแปร' in i):
-            order0=i.index('ตัวแปร')
-            answer+=f'({i[order0+1]})'
-        elif('ข้อความ' in i):
-            order0=i.index('ข้อความ')
-            answer+=f"('{i[order0+1]}')"
     return (answer, tab)
 """
 tab=0
@@ -126,4 +134,4 @@ for i in mylist:
 for i in listans:
     if i:
         print(i)
-""" 
+"""
