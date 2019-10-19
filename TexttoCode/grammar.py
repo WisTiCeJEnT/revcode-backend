@@ -1,40 +1,43 @@
 import deepcut
 import dialogflow_api
 import detection
-def dialogflow(s):
-    return s
-def grammar(s):
-    list_word = deepcut.tokenize(s)
+'''
+def greater(lis):
     ans=[]
-    for word in list_word:
-        ans.append(dialogflow_api.detect_intent_texts(word))
-    detection.tran(ans,0)
+    i=0
+    while i<len(lis):
+        if lis[i]=='มาก' and lis[i+1]=='กว่า':
+            ans.append('')
+            ans[i]=ans[i].replace('','มากกว่า')
+            i+=2
+        else:
+            ans.append(lis[i])
+            i+=1
+'''
+def grammar(s):
+    x = deepcut.tokenize(s)
+    #x=grammar(s)
+    ans=[]
+    stringans=''
+    check=False
+    for i in x:
+        if check:
+            stringans+=i
+            continue
+        if i!='ข้อความ':
+            check=False
+            ans.append(dialogflow_api.detect_intent_texts(i))
+        else:
+            check=True
+            ans.append(i)
+    #greater(ans)
+    #lesser(ans)
+   # equal(ans)
+
+    print(ans)
+    ans.append(stringans)
+    ans = detection.tran(ans,0)
     return ans
 
-'''
-stringpattern='ข้อความ'
-intpattern='ตัวเลข'
-printpattern='พิมพ์'
-test='พิมพ์ข้อความควายกัดหมา'
-test2='ตัวแปรxเท่ากับข้อความควายกัดหมา'
-keyword=[]
-keyword.append((stringpattern,intpattern,printpattern))
-z=[]
-x=cutword(test2)
-j=0
-k=0
-for i in x:
-    if i in keyword[0]:
-        z.append(i)
-        j+=1
-        k+=1
-    elif len(z)==j:
-        z.append(x[j])
-    else:
-        z[k]+=x[j+1]
-        j+=1
-print(x)
-print(z)
-#if 'เท่า' in x and 'กับ' in x and 'ข้อความ' in x:   
-#z=z1.split('แสดงผล')
-'''
+#print(grammar('สวัสดีครับมากกว่าข้อความมากกว่านี้มาจากจุ้ยเอง'))
+#dialogflow_api.detect_intent_texts(i)
