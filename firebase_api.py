@@ -1,9 +1,10 @@
-import pyrebase
 import datetime
 import os
+import firebase_admin
+from firebase_admin import db
 
 def add_new_user(uid, name):
-  if(uid not in dict(db.child("user").get().val()).keys()):
+  if(uid not in USER.get().keys()):
       data = {
         "user_data": {
           "uid": uid, 
@@ -11,10 +12,10 @@ def add_new_user(uid, name):
           },
         "user_storage": {}
       }
-      db.child("/user/").child(uid).set(data)
+      USER.child(uid).update(data)
 
 def get_user_data(uid):
-  db_data = db.child("user").child(uid).get().val()
+  db_data = USER.child(uid).get()
   res = {}
   res["user_data"] = db_data["user_data"]
   res["user_storage"] = []
@@ -28,7 +29,7 @@ def get_user_data(uid):
   return res
 
 def get_file(uid, file_id):
-  db_data = db.child("user").child(uid).child("user_storage").child(file_id).get().val()
+  db_data = USER.child(uid).child("user_storage").child(file_id).get()
   db_data["file_id"] = file_id
   return db_data
 
@@ -40,35 +41,31 @@ def add_new_file(uid):
     "extension": "",
     "filename": ""
   }
-  firebase_res = db.child("user").child(uid).child("user_storage").push(data)
-  return firebase_res["name"]
+  firebase_res = USER.child(uid).child("user_storage").push(data)
+  return firebase_res.key
 
 def save_file(uid, file_id, file_data):
-  data = db.child("user").child(uid).child("user_storage").child(file_id).get().val()
+  data = USER.child(uid).child("user_storage").child(file_id).get()
   data["code"] = file_data["code"]
   data["extension"] = file_data["extension"]
   data["filename"] = file_data["filename"]
   data["date_edit"] = datetime.datetime.now().strftime("%d-%m-%Y")
-  db.child("user").child(uid).child("user_storage").child(file_id).set(data)
+  USER.child(uid).child("user_storage").child(file_id).update(data)
   return file_id
 
 def remove_file(uid, file_id):
-  db.child("user").child(uid).child("user_storage").child(file_id).remove()
+  USER.child(uid).child("user_storage").child(file_id).delete()
   return file_id
   
 
 
 try:
-  config = {
-    "apiKey": os.environ.get("FIREBASE_APIKEY"),
-    "authDomain": "https://revcode-83ac0.firebaseapp.com/",
-    "databaseURL": "https://revcode-83ac0.firebaseio.com/",
-    "storageBucket": "projectId.appspot.com",
-    #"serviceAccount": ""
-  }
 
-  firebase = pyrebase.initialize_app(config)
-  db = firebase.database()
+  cred = firebase_admin.credentials.Certificate("./firebaseServiceAccountKey.json")
+  firebase_admin.initialize_app(cred, options={
+    'databaseURL': 'https://revcode-83ac0.firebaseio.com',
+  })
+  USER = db.reference('user')
 
 except:
   print("Get environ key ERROR")

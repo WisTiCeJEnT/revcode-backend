@@ -1,5 +1,6 @@
 flask==1.1.1
-requests==2.11.1
+firebase_admin
+requests
 flask_cors==3.0.8
 pyrebase==3.0.27
 gunicorn
