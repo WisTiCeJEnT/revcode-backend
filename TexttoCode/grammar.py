@@ -34,7 +34,8 @@ def grammar(s):
             ans.append(i)
     ans = mergecarefulword(ans)
     ans.append(stringans)
+    before_detect = ans
     ans = detection.tran(ans,0)
-    return ans
+    return (ans[0], x, before_detect)
 
 #
