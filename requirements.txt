@@ -2,7 +2,7 @@
 flask==1.1.1
 flask_cors==3.0.8
 gunicorn==19.9.0
-requests==2.22.0 
+requests==2.22.0
 
 #firebase_api
 firebase_admin==3.0.0
@@ -11,5 +11,5 @@ firebase_admin==3.0.0
 dialogflow==0.4.0
 
 #grammar part
--e git+git@github.com:WisTiCeJEnT/deepcut.git@dc814fa
+-e git+https://github.com/WisTiCeJEnT/deepcut.git@dc814fa621a4ea0c80cb2b66e26766edba0bd355#egg=deepcut
 tensorflow==1.14.0
