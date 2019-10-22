@@ -3,7 +3,7 @@ from flask_cors import CORS
 import firebase_api
 import sys
 sys.path.insert(1, './TexttoCode')
-import grammar
+#import grammar
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -83,7 +83,8 @@ def user_remove_file():
 def getSpeech():
     try:
         text = request.args.get("text")
-        revcode, just_cut, before_detext = grammar.grammar(text)
+        #revcode, just_cut, before_detext = grammar.grammar(text)
+        revcode, just_cut, before_detext = ("undefined", "undefined", text)
         return jsonify({"status": "ok",
                         "before_text": text,
                         "cut_text": just_cut,
