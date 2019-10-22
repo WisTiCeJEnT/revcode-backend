@@ -3,3 +3,4 @@ __pycache__
 /Authentication/Config.json
 __pycache__/
 firebaseServiceAccountKey.json
+dialogflowServiceAccountKey.json

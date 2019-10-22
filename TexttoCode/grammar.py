@@ -50,5 +50,8 @@ def grammar(s):
             ans.append(i)
     ans.append(stringans)
     ans = mergecarefulword(ans)
+    before_detect = ans
     ans = detection.tran(ans,0)
-    return ans
+    return (ans[0], x, before_detect)
+
+#
