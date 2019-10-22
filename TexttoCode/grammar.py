@@ -2,6 +2,7 @@ import deepcut
 import dialogflow_api
 import detection
 CAREFUL_WORD = [['มาก', 'กว่า'], ['น้อย', 'กว่า'], ['เท่า', 'กับ'], ['ตัว', 'แปร']]
+firstpriority = [['มากกว่า'],['น้อยกว่า'],['เท่ากับ'],['ตัวแปร']]
 def mergecarefulword(lis):
     for j in range (len(CAREFUL_WORD)):
         i=0
@@ -15,14 +16,29 @@ def mergecarefulword(lis):
                 ans.append(lis[i])
                 i+=1
         lis=ans
-    return ans
+    realans=[]
+    for i in ans:
+        if i==' ' or i=='':
+            pass
+        else:
+            realans.append(i)
+    return realans
 
 def grammar(s):
+    for i in range (len(firstpriority)):
+        if firstpriority[i][0] in s:
+            s=s.replace(firstpriority[i][0],' '+firstpriority[i][0]+' ')
     x = deepcut.tokenize(s)
+    newarrayfordeepcut=[]
+    for i in x:
+        if i==' ' or i=='':
+            pass
+        else:
+            newarrayfordeepcut.append(i)
     ans=[]
     stringans=''
     check=False
-    for i in x:
+    for i in newarrayfordeepcut:
         if check:
             stringans+=i
             continue
@@ -32,9 +48,7 @@ def grammar(s):
         else:
             check=True
             ans.append(i)
-    ans = mergecarefulword(ans)
     ans.append(stringans)
+    ans = mergecarefulword(ans)
     ans = detection.tran(ans,0)
     return ans
-
-#
