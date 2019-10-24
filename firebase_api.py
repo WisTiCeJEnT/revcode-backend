@@ -33,12 +33,23 @@ def get_user_data(uid):
 
 def get_file(uid, file_id):
   db_data = USER.child(uid).child("user_storage").child(file_id).get()
+  db_data["code"] = '\n'.join(db_data["code"])
   db_data["file_id"] = file_id
   return db_data
 
+def get_indent(uid, file_id, line_no):
+  indent = USER.child(uid).child("user_storage").child(file_id).child("indent").child(line_no).get()
+  return indent
+
+def set_indent(uid, file_id, line_no, new_indent):
+  indent_list = USER.child(uid).child("user_storage").child(file_id).child("indent").get()
+  indent_list.insert(line_no, new_indent)
+  USER.child(uid).child("user_storage").child(file_id).child("indent").update(indent_list)
+
 def add_new_file(uid):
   data = {
-    "code": "",
+    "code": [""],
+    "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),
     "extension": "",
