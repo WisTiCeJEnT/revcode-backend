@@ -27,7 +27,7 @@ def get_user_data(uid):
       tmp["last_edit"] = db_data["user_storage"][item]["date_edit"]
       tmp["file_id"] = item
       res["user_storage"].append(tmp)
-    except:
+  except:
       pass
   return res
 
