@@ -3,7 +3,7 @@ from flask_cors import CORS
 import firebase_api
 import sys
 sys.path.insert(1, './TexttoCode')
-#import grammar
+import grammar
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -24,8 +24,9 @@ def add_user():
             firebase_api.add_new_user(data["uid"], data["name"])
             return jsonify({"status": "ok",
                             "uid": data["uid"],
-                            "file_id": firebase_api.add_new_file(uid)})
-    except:
+                            "file_id": firebase_api.add_new_file(data["uid"])})
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 @app.route('/userdata', methods = ['GET'])
@@ -36,7 +37,8 @@ def get_user_data():
             return jsonify({"status": "ok",
                             "uid": uid,
                             "userData": firebase_api.get_user_data(uid)})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 @app.route('/loadfile', methods = ['GET'])
@@ -47,7 +49,8 @@ def user_load_file():
         return jsonify({"status": "ok",
                         "uid": uid,
                         "file_data": firebase_api.get_file(uid, file_id)})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 @app.route('/newfile', methods = ['GET'])
@@ -57,7 +60,8 @@ def user_add_new_file():
         return jsonify({"status": "ok",
                         "uid": uid,
                         "file_id": firebase_api.add_new_file(uid)})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
         
 @app.route('/savefile', methods = ['POST'])
@@ -67,7 +71,8 @@ def user_save_file():
         return jsonify({"status": "ok",
                         "uid": data["uid"],
                         "file_id": firebase_api.save_file(data["uid"], data["file_id"], data)})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 @app.route('/removefile', methods = ['POST'])
@@ -77,21 +82,22 @@ def user_remove_file():
         return jsonify({"status": "ok",
                         "uid": data["uid"],
                         "file_id": firebase_api.remove_file(data["uid"], data["file_id"])})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 @app.route('/speech', methods = ['GET', 'POST'])
 def getSpeech():
     try:
         text = request.args.get("text")
-        #revcode, just_cut, before_detext = grammar.grammar(text)
-        revcode, just_cut, before_detext = ("undefined", "undefined", text)
+        revcode, just_cut, before_detext = grammar.grammar(text)
         return jsonify({"status": "ok",
                         "before_text": text,
                         "cut_text": just_cut,
                         "before_detect": before_detext,
                         "code": revcode})
-    except:
+    except Exception as e: 
+        print(e)
         return jsonify({"status": "error"})
 
 if __name__ == "__main__":
