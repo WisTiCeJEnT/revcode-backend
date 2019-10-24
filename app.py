@@ -67,6 +67,7 @@ def user_add_new_file():
 @app.route('/savefile', methods = ['POST'])
 def user_save_file():
     try:
+        return jsonify({"status": "out of service"})
         data = request.get_json()
         return jsonify({"status": "ok",
                         "uid": data["uid"],
@@ -89,13 +90,26 @@ def user_remove_file():
 @app.route('/speech', methods = ['GET', 'POST'])
 def getSpeech():
     try:
-        text = request.args.get("text")
-        revcode, just_cut, before_detext = grammar.grammar(text)
-        return jsonify({"status": "ok",
-                        "before_text": text,
-                        "cut_text": just_cut,
-                        "before_detect": before_detext,
-                        "code": revcode})
+        if request.method == 'POST':
+            data = request.json
+            text = data["raw_text"]
+            current_indent = firebase_api.get_indent(data["uid"], data["file_id"], data["line_no"])
+            revcode, new_indent, just_cut, before_detext = grammar.grammar(text, current_indent)
+            firebase_api.set_indent(data["uid"], data["file_id"], data["line_no"]+1, new_indent)
+            return jsonify({"status": "ok",
+                            "before_text": text,
+                            "cut_text": just_cut,
+                            "before_detect": before_detext,
+                            "code": revcode})
+
+        else:
+            text = request.args.get("text")
+            revcode, new_indent, just_cut, before_detext = grammar.grammar(text, 0)
+            return jsonify({"status": "ok",
+                            "before_text": text,
+                            "cut_text": just_cut,
+                            "before_detect": before_detext,
+                            "code": revcode})
     except Exception as e: 
         print(e)
         return jsonify({"status": "error"})

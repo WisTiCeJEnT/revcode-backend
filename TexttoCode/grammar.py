@@ -55,4 +55,4 @@ def grammar(s):
     for i in ans:
         before_detect.append(dialogflow_api.detect_intent_texts(i))
     ans = detection.tran(before_detect, 0)
-    return (ans[0], before_df, before_detect)
+    return (ans[0], ans[1], before_df, before_detect)
