@@ -19,13 +19,16 @@ def get_user_data(uid):
   res = {}
   res["user_data"] = db_data["user_data"]
   res["user_storage"] = []
-  for item in db_data["user_storage"].keys():
-    tmp = {}
-    tmp["filename"] = db_data["user_storage"][item]["filename"]
-    tmp["extension"] = db_data["user_storage"][item]["extension"]
-    tmp["last_edit"] = db_data["user_storage"][item]["date_edit"]
-    tmp["file_id"] = item
-    res["user_storage"].append(tmp)
+  try:
+    for item in db_data["user_storage"].keys():
+      tmp = {}
+      tmp["filename"] = db_data["user_storage"][item]["filename"]
+      tmp["extension"] = db_data["user_storage"][item]["extension"]
+      tmp["last_edit"] = db_data["user_storage"][item]["date_edit"]
+      tmp["file_id"] = item
+      res["user_storage"].append(tmp)
+    except:
+      pass
   return res
 
 def get_file(uid, file_id):
