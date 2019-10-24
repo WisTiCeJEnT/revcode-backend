@@ -44,14 +44,15 @@ def grammar(s):
             continue
         if i!='ข้อความ':
             check=False
-            ans.append(dialogflow_api.detect_intent_texts(i))
+            ans.append(i)
         else:
             check=True
             ans.append(i)
     ans.append(stringans)
     ans = mergecarefulword(ans)
-    before_detect = ans
-    ans = detection.tran(ans,0)
-    return (ans[0], x, before_detect)
-
-#
+    before_detect = []
+    before_df = ans
+    for i in ans:
+        before_detect.append(dialogflow_api.detect_intent_texts(i))
+    ans = detection.tran(before_detect, 0)
+    return (ans[0], before_df, before_detect)
