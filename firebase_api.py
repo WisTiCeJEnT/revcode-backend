@@ -38,17 +38,18 @@ def get_file(uid, file_id):
   return db_data
 
 def get_indent(uid, file_id, line_no):
-  indent = USER.child(uid).child("user_storage").child(file_id).child("indent").child(line_no).get()
-  return indent
+  indent = USER.child(uid).child("user_storage").child(file_id).child("indent").get()
+  return indent[int(line_no)]
 
-def set_indent(uid, file_id, line_no, new_indent):
-  indent_list = USER.child(uid).child("user_storage").child(file_id).child("indent").get()
-  indent_list.insert(line_no, new_indent)
-  USER.child(uid).child("user_storage").child(file_id).child("indent").update(indent_list)
+def set_indent(uid, file_id, line_no, new_indent, code):
+  file_data = USER.child(uid).child("user_storage").child(file_id).get()
+  file_data["indent"].insert(int(line_no)+1, int(new_indent))
+  file_data["code"].insert(int(line_no), code)
+  USER.child(uid).child("user_storage").child(file_id).update(file_data)
 
 def add_new_file(uid):
   data = {
-    "code": [""],
+    "code": {"0": 0},
     "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),

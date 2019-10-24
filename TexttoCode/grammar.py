@@ -24,7 +24,7 @@ def mergecarefulword(lis):
             realans.append(i)
     return realans
 
-def grammar(s):
+def grammar(s, indent):
     for i in range (len(firstpriority)):
         if firstpriority[i][0] in s:
             s=s.replace(firstpriority[i][0],' '+firstpriority[i][0]+' ')
@@ -54,5 +54,5 @@ def grammar(s):
     before_df = ans
     for i in ans:
         before_detect.append(dialogflow_api.detect_intent_texts(i))
-    ans = detection.tran(before_detect, 0)
+    ans = detection.tran(before_detect, indent)
     return (ans[0], ans[1], before_df, before_detect)
