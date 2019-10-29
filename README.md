@@ -23,7 +23,6 @@ backend for RevCode project
 ```json
 {
 	"uid": "cidCuqVCQ5OKf26IAGjKRr8mLA82",
-	"file_id": "-LqbdD_0LnDR7QH7OeWy",
 	"filename": "bra.py", 
 	"extension": "py"
 }
