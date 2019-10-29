@@ -26,7 +26,7 @@ def add_user():
                             "uid": data["uid"],
                             "file_id": firebase_api.add_new_file(data["uid"])})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 @app.route('/userdata', methods = ['GET'])
@@ -38,7 +38,7 @@ def get_user_data():
                             "uid": uid,
                             "userData": firebase_api.get_user_data(uid)})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 @app.route('/loadfile', methods = ['GET'])
@@ -50,7 +50,7 @@ def user_load_file():
                         "uid": uid,
                         "file_data": firebase_api.get_file(uid, file_id)})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 @app.route('/newfile', methods = ['POST'])
@@ -61,7 +61,7 @@ def user_add_new_file():
                         "uid": data["uid"],
                         "file_id": firebase_api.add_new_file(data)})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
         
 @app.route('/savefile', methods = ['POST'])
@@ -73,7 +73,7 @@ def user_save_file():
                         "uid": data["uid"],
                         "file_id": firebase_api.save_file(data["uid"], data["file_id"], data)})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 @app.route('/removefile', methods = ['POST'])
@@ -84,7 +84,7 @@ def user_remove_file():
                         "uid": data["uid"],
                         "file_id": firebase_api.remove_file(data["uid"], data["file_id"])})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 @app.route('/speech', methods = ['GET', 'POST'])
@@ -111,7 +111,7 @@ def getSpeech():
                             "before_detect": before_detext,
                             "code": revcode})
     except Exception as e: 
-        print(e)
+        print("Error:", e)
         return jsonify({"status": "error"})
 
 if __name__ == "__main__":
