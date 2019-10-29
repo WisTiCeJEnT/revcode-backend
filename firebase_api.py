@@ -54,7 +54,7 @@ def add_new_file(data):
     "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),
-    "extension": data["extention"],
+    "extension": data["extension"],
     "filename": data["filename"]
   }
   firebase_res = USER.child(uid).child("user_storage").push(data)
