@@ -21,10 +21,12 @@ def add_user():
             # username = request.args.get("uname")
             # print("got args")
             data = request.get_json()
+            data["filename"] = "Untitled"
+            data["extention"] = ""
             firebase_api.add_new_user(data["uid"], data["name"])
             return jsonify({"status": "ok",
                             "uid": data["uid"],
-                            "file_id": firebase_api.add_new_file(data["uid"])})
+                            "file_id": firebase_api.add_new_file(data)})
     except Exception as e: 
         print("Error:", e)
         return jsonify({"status": "error"})
