@@ -53,13 +53,13 @@ def user_load_file():
         print(e)
         return jsonify({"status": "error"})
 
-@app.route('/newfile', methods = ['GET'])
+@app.route('/newfile', methods = ['POST'])
 def user_add_new_file():
     try:
-        uid = request.args.get("uid")
+        data = request.get_json()
         return jsonify({"status": "ok",
                         "uid": uid,
-                        "file_id": firebase_api.add_new_file(uid)})
+                        "file_id": firebase_api.add_new_file(data)})
     except Exception as e: 
         print(e)
         return jsonify({"status": "error"})

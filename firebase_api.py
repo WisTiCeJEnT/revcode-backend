@@ -36,13 +36,14 @@ def get_file(uid, file_id):
   db_data["file_id"] = file_id
   return db_data
 
-def add_new_file(uid):
+def add_new_file(data):
+  uid = data["uid"]
   data = {
     "code": "",
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),
-    "extension": "",
-    "filename": ""
+    "extension": data["extention"],
+    "filename": data["filename"]
   }
   firebase_res = USER.child(uid).child("user_storage").push(data)
   return firebase_res.key
