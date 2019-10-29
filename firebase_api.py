@@ -47,14 +47,15 @@ def set_indent(uid, file_id, line_no, new_indent, code):
   file_data["code"].insert(int(line_no), code)
   USER.child(uid).child("user_storage").child(file_id).update(file_data)
 
-def add_new_file(uid):
+def add_new_file(data):
+  uid = data["uid"]
   data = {
     "code": {"0": 0},
     "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),
-    "extension": "",
-    "filename": ""
+    "extension": data["extention"],
+    "filename": data["filename"]
   }
   firebase_res = USER.child(uid).child("user_storage").push(data)
   return firebase_res.key
