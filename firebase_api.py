@@ -15,16 +15,17 @@ def add_new_user(uid, name):
       USER.child(uid).update(data)
 
 def get_user_data(uid):
-  db_data = USER.child(uid).get()
+  db_data = USER.child(uid).child("user_data").get()
+  db_storage = USER.child(uid).child("user_storage").order_by_child("date_edit").get()
   res = {}
-  res["user_data"] = db_data["user_data"]
+  res["user_data"] = db_data
   res["user_storage"] = []
   try:
-    for item in db_data["user_storage"].keys():
+    for item in db_storage.keys():
       tmp = {}
-      tmp["filename"] = db_data["user_storage"][item]["filename"]
-      tmp["extension"] = db_data["user_storage"][item]["extension"]
-      tmp["last_edit"] = db_data["user_storage"][item]["date_edit"]
+      tmp["filename"] = db_storage[item]["filename"]
+      tmp["extension"] = db_storage[item]["extension"]
+      tmp["last_edit"] = db_storage[item]["date_edit"]
       tmp["file_id"] = item
       res["user_storage"].append(tmp)
   except:
@@ -33,7 +34,6 @@ def get_user_data(uid):
 
 def get_file(uid, file_id):
   db_data = USER.child(uid).child("user_storage").child(file_id).get()
-  db_data["code"] = '\n'.join(db_data["code"])
   db_data["file_id"] = file_id
   return db_data
 
@@ -73,8 +73,6 @@ def remove_file(uid, file_id):
   USER.child(uid).child("user_storage").child(file_id).delete()
   return file_id
   
-
-
 try:
 
   cred = firebase_admin.credentials.Certificate("./firebaseServiceAccountKey.json")
