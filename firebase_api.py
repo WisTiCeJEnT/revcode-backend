@@ -57,7 +57,7 @@ def set_indent(uid, file_id, line_no, new_indent, code):
 def add_new_file(data):
   uid = data["uid"]
   data = {
-    "code": {"0": 0},
+    "code": {"0": ""},
     "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
     "date_edit": datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"),
