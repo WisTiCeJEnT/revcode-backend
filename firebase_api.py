@@ -19,22 +19,29 @@ def get_user_data(uid):
   db_storage = USER.child(uid).child("user_storage").order_by_child("date_edit").get()
   res = {}
   res["user_data"] = db_data
-  res["user_storage"] = db_storage
-  try:
-    for item in db_storage.keys():
-      tmp = {}
-      tmp["filename"] = db_data["user_storage"][item]["filename"]
-      tmp["extension"] = db_data["user_storage"][item]["extension"]
-      tmp["last_edit"] = db_data["user_storage"][item]["date_edit"]
-      tmp["file_id"] = item
-      res["user_storage"].append(tmp)
-  except:
-      pass
+  res["user_storage"] = []
+  for item in db_storage.keys():
+    tmp = {}
+    tmp["filename"] = db_storage[item]["filename"]
+    tmp["extension"] = db_storage[item]["extension"]
+    tmp["last_edit"] = cut_date(db_storage[item]["date_edit"])
+    tmp["file_id"] = item
+    res["user_storage"].append(tmp)
+  res["user_storage"] = res["user_storage"][::-1]
   return res
+
+def cut_date(date_string):
+  try:
+    date = date_string.split("-")
+    date_string = f"{date[2]}-{date[1]}-{date[0]}"
+  except:
+    pass
+  return date_string
 
 def get_file(uid, file_id):
   db_data = USER.child(uid).child("user_storage").child(file_id).get()
   db_data["file_id"] = file_id
+  db_data["date_edit"] = cut_date(db_data["date_edit"])
   return db_data
 
 def get_indent(uid, file_id, line_no):
@@ -53,7 +60,7 @@ def add_new_file(data):
     "code": {"0": 0},
     "indent": [0],
     "date_create": datetime.datetime.now().strftime("%d-%m-%Y"),
-    "date_edit": datetime.datetime.now().strftime("%d-%m-%Y"),
+    "date_edit": datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"),
     "extension": data["extension"],
     "filename": data["filename"]
   }
@@ -65,7 +72,7 @@ def save_file(uid, file_id, file_data):
   data["code"] = file_data["code"]
   data["extension"] = file_data["extension"]
   data["filename"] = file_data["filename"]
-  data["date_edit"] = datetime.datetime.now().strftime("%d-%m-%Y")
+  data["date_edit"] = datetime.datetime.now().strftime("%Y-%m-%d")
   USER.child(uid).child("user_storage").child(file_id).update(data)
   return file_id
 
