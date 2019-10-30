@@ -20,22 +20,20 @@ def get_user_data(uid):
   res = {}
   res["user_data"] = db_data
   res["user_storage"] = []
-  try:
-    for item in db_storage.keys():
-      tmp = {}
-      tmp["filename"] = db_storage[item]["filename"]
-      tmp["extension"] = db_storage[item]["extension"]
-      tmp["last_edit"] = cut_date(db_storage[item]["date_edit"])
-      tmp["file_id"] = item
-      res["user_storage"].append(tmp)
-  except:
-      pass
+  for item in db_storage.keys():
+    tmp = {}
+    tmp["filename"] = db_storage[item]["filename"]
+    tmp["extension"] = db_storage[item]["extension"]
+    tmp["last_edit"] = cut_date(db_storage[item]["date_edit"])
+    tmp["file_id"] = item
+    res["user_storage"].append(tmp)
+  res["user_storage"] = res["user_storage"][::-1]
   return res
 
 def cut_date(date_string):
   try:
     date = date_string.split("-")
-    date_string = f"{date[2]-date[1]-date[0]}"
+    date_string = f"{date[2]}-{date[1]}-{date[0]}"
   except:
     pass
   return date_string
