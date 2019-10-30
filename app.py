@@ -17,9 +17,6 @@ def root():
 def add_user():
     try:
         if request.method == 'POST':
-            # uid = request.args.get("uid")
-            # username = request.args.get("uname")
-            # print("got args")
             data = request.get_json()
             data["filename"] = "Untitled"
             data["extention"] = ""
@@ -69,7 +66,6 @@ def user_add_new_file():
 @app.route('/savefile', methods = ['POST'])
 def user_save_file():
     try:
-        return jsonify({"status": "out of service"})
         data = request.get_json()
         return jsonify({"status": "ok",
                         "uid": data["uid"],
