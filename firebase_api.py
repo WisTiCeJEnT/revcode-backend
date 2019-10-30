@@ -20,7 +20,6 @@ def get_user_data(uid):
   res = {}
   res["user_data"] = db_data
   res["user_storage"] = db_storage
-  """
   try:
     for item in db_storage.keys():
       tmp = {}
@@ -31,7 +30,6 @@ def get_user_data(uid):
       res["user_storage"].append(tmp)
   except:
       pass
-  """
   return res
 
 def get_file(uid, file_id):
