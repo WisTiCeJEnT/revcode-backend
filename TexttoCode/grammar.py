@@ -1,8 +1,13 @@
 import deepcut
 import dialogflow_api
 import detection
-CAREFUL_WORD = [['มาก', 'กว่า'], ['น้อย', 'กว่า'], ['เท่า', 'กับ'], ['ตัว', 'แปร']]
-firstpriority = [['มากกว่า'],['น้อยกว่า'],['เท่ากับ'],['ตัวแปร']]
+import sys
+sys.path.insert(1, '../')
+import firebase_api
+
+constant = firebase_api.load_carefulword()
+CAREFUL_WORD = constant["careful_word"]#[['มาก', 'กว่า'], ['น้อย', 'กว่า'], ['เท่า', 'กับ'], ['ตัว', 'แปร']]
+firstpriority = constant["firstpriority"]#[['มากกว่า'],['น้อยกว่า'],['เท่ากับ'],['ตัวแปร']]
 def mergecarefulword(lis):
     for j in range (len(CAREFUL_WORD)):
         i=0
