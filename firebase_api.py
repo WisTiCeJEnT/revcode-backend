@@ -79,6 +79,9 @@ def save_file(uid, file_id, file_data):
 def remove_file(uid, file_id):
   USER.child(uid).child("user_storage").child(file_id).delete()
   return file_id
+
+def load_carefulword():
+    return CONSTANT.get()
   
 try:
 
@@ -87,6 +90,7 @@ try:
     'databaseURL': 'https://revcode-83ac0.firebaseio.com',
   })
   USER = db.reference('user')
+  CONSTANT = db.reference('constant')
 
 except:
   print("Get environ key ERROR")
