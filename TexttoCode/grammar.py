@@ -7,7 +7,7 @@ import firebase_api
 
 constant = firebase_api.load_carefulword()
 CAREFUL_WORD = constant["careful_word"]#[['มาก', 'กว่า'], ['น้อย', 'กว่า'], ['เท่า', 'กับ'], ['ตัว', 'แปร']]
-firstpriority = constant["firstpriority"]#[['มากกว่า'],['น้อยกว่า'],['เท่ากับ'],['ตัวแปร']]
+firstpriority = constant["firstpriority"]#['มากกว่า','น้อยกว่า','เท่ากับ','ตัวแปร']
 def mergecarefulword(lis):
     for j in range (len(CAREFUL_WORD)):
         i=0
@@ -31,8 +31,8 @@ def mergecarefulword(lis):
 
 def grammar(s, indent):
     for i in range (len(firstpriority)):
-        if firstpriority[i][0] in s:
-            s=s.replace(firstpriority[i][0],' '+firstpriority[i][0]+' ')
+        if firstpriority[i] in s:
+            s=s.replace(firstpriority[i],' '+firstpriority[i]+' ')
     x = deepcut.tokenize(s)
     newarrayfordeepcut=[]
     for i in x:
