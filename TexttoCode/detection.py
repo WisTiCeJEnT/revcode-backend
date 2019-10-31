@@ -29,47 +29,15 @@ def tran(i, tab):
             elif('ใน' in i):
                 order1=i.index('ใน')
                 answer+=f'in {i[order1+1]}'
-        answer+=f':'
-
-    if 'while' in i  : ## while
-        answer+=f'while '
-        if ('ตัวแปร' in i) :
-            order0=i.index('ตัวแปร')
-            answer+=f'{i[order0+1]} '
-            if('มากกว่า' in i):
-                order1=i.index('มากกว่า')
-                answer+=f'>'
-                if(i[order1+1] == 'เท่ากับ'):
-                    order1+=1
-                    answer+=f'='
-                answer+=' '
-                answer+=f'{i[order1+1]}'
-            elif('น้อยกว่า' in i):
-                order1=i.index('น้อยกว่า')
-                answer+=f'<'
-                if(i[order1+1] == 'เท่ากับ'):
-                    order1+=1
-                    answer+=f'='
-                answer+=' '
-                answer+=f'{i[order1+1]}'
-            elif('เท่ากับ' in i):
-                order1=i.index('เท่ากับ')
-                answer+=f'== '
-                answer+=f'{i[order1+1]}'
-            elif('ใน' in i):
-                order1=i.index('ใน')
-                answer+=f'in {i[order1+1]}'
-        else :
-            order0=i.index('while')
-            answer+=f'{i[order0+1]}'
-        answer+=f' :'    
+        answer+=f':' 
         
-    if(('if'  in i) or ('elif'  in i) ) : ## if
-        
+    if(('if'  in i) or ('elif'  in i) or ('while' in i)) : ## if       
         if('if' in i ):
             answer+=f'if '
         if('elif' in i):
             answer+=f'elif '
+        if('while' in i):
+            answer+=f'while'
         if ('ตัวแปร' in i) :
             order0=i.index('ตัวแปร')
             answer+=f'{i[order0+1]} '
