@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import firebase_api
 import sys
+import json
 sys.path.insert(1, './TexttoCode')
 import grammar
 
@@ -94,6 +95,12 @@ def getSpeech():
             current_indent = data["indent"]  # firebase_api.get_indent(data["uid"], data["file_id"], data["line_no"])
             revcode, new_indent, just_cut, before_detext = grammar.grammar(text, current_indent)
             firebase_api.set_indent(data["uid"], data["file_id"], data["line_no"], new_indent, revcode)
+            print(json.dumps({"status": "ok",
+                            "before_text": text,
+                            "cut_text": just_cut,
+                            "before_detect": before_detext,
+                            "code": revcode}, sort_keys=True, indent=4, ensure_ascii=False, separators=(',', ': ')))
+
             return jsonify({"status": "ok",
                             "before_text": text,
                             "cut_text": just_cut,
