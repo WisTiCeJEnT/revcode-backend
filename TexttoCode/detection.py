@@ -46,21 +46,27 @@ def tran(i, tab):
                 answer+=f'>'
                 if(i[order1+1] == 'เท่ากับ'):                   
                     answer+=f'='
+                else:
+                    answer+=f'{i[order1+1]}'
                 answer+=' '
-                for n in range(order1+2,len(i)):  
-                    if(i[n]=='ตัวแปร'):
-                        continue
-                    answer+=f'{i[n]} '
+                if(len(i) > order1+2):
+                    for n in range(order1+2,len(i)):  
+                        if(i[n]=='ตัวแปร'):
+                            continue
+                        answer+=f'{i[n]} '
             elif('น้อยกว่า' in i):
                 order1=i.index('น้อยกว่า')
                 answer+=f'<'
                 if(i[order1+1] == 'เท่ากับ'):
                     answer+=f'='
+                else:
+                    answer+=f'{i[order1+1]}'
                 answer+=' '
-                for n in range(order1+2,len(i)):  
-                    if(i[n]=='ตัวแปร'):
-                        continue
-                    answer+=f'{i[n]} '
+                if (len(i) > order1+2):
+                    for n in range(order1+2,len(i)):  
+                        if(i[n]=='ตัวแปร'):
+                            continue
+                        answer+=f'{i[n]} '
                 
             elif('เท่ากับ' in i):
                 order1=i.index('เท่ากับ')
