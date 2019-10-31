@@ -116,7 +116,10 @@ def tran(i, tab):
         answer+=f'print'      
         if('ตัวแปร' in i):
             order0=i.index('ตัวแปร')
-            answer+=f'({i[order0+1]})'
+            for n in range(order0+1,len(i)):  
+                if(i[n]=='ตัวแปร'):
+                    continue
+                answer+=f'{i[n]} '
         elif('ข้อความ' in i):
             order0=i.index('ข้อความ')
             answer+=f"('{i[order0+1]}')"
