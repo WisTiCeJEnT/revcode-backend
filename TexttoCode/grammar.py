@@ -14,8 +14,7 @@ def mergecarefulword(lis):
         ans=[]
         while i<len(lis):
             if lis[i]==CAREFUL_WORD[j][0] and lis[i+1]==CAREFUL_WORD[j][1]:
-                ans.append('')
-                ans[i]=ans[i].replace('',CAREFUL_WORD[j][0]+CAREFUL_WORD[j][1])
+                ans.append(CAREFUL_WORD[j][0]+CAREFUL_WORD[j][1])
                 i+=2
             else:
                 ans.append(lis[i])
