@@ -105,7 +105,7 @@ def tran(i, tab):
             for n in range(order0+1,len(i)):  
                 if(i[n]=='ตัวแปร'):
                     continue
-                answer+=f'{i[n]} '
+                answer+=f'({i[n]} )'
         elif('ข้อความ' in i):
             order0=i.index('ข้อความ')
             answer+=f"('{i[order0+1]}')"
