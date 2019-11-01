@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import firebase_api
+
 import sys
 import json
+import traceback
+
 sys.path.insert(1, './TexttoCode')
 import grammar
+import firebase_api
+
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -16,7 +20,7 @@ def root():
 
 @app.route('/adduser', methods = ['POST'])
 def add_user():
-    try:
+    #try:
         if request.method == 'POST':
             data = request.get_json()
             data["filename"] = "Untitled"
@@ -25,9 +29,9 @@ def add_user():
             return jsonify({"status": "ok",
                             "uid": data["uid"],
                             "file_id": firebase_api.add_new_file(data)})
-    except Exception as e: 
-        print("Error:", e)
-        return jsonify({"status": "error"})
+    #except Exception as e: 
+    #    print("Error:", e)
+    #    return jsonify({"status": "error"})
 
 @app.route('/userdata', methods = ['GET'])
 def get_user_data():
@@ -117,6 +121,7 @@ def getSpeech():
                             "code": revcode})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 if __name__ == "__main__":
