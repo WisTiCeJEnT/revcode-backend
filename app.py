@@ -20,7 +20,7 @@ def root():
 
 @app.route('/adduser', methods = ['POST'])
 def add_user():
-    #try:
+    try:
         if request.method == 'POST':
             data = request.get_json()
             data["filename"] = "Untitled"
@@ -29,9 +29,9 @@ def add_user():
             return jsonify({"status": "ok",
                             "uid": data["uid"],
                             "file_id": firebase_api.add_new_file(data)})
-    #except Exception as e: 
-    #    print("Error:", e)
-    #    return jsonify({"status": "error"})
+    except Exception as e: 
+        print("Error:", e)
+        return jsonify({"status": "error"})
 
 @app.route('/userdata', methods = ['GET'])
 def get_user_data():
