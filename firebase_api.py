@@ -3,12 +3,13 @@ import os
 import firebase_admin
 from firebase_admin import db
 
-def add_new_user(uid, name):
+def add_new_user(uid, name, email):
   if(uid not in USER.get().keys()):
       data = {
         "user_data": {
           "uid": uid, 
-          "name": name
+          "name": name,
+          "email": email
           },
         "user_storage": {}
       }

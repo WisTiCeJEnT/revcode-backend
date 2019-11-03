@@ -25,7 +25,7 @@ def add_user():
             data = request.get_json()
             data["filename"] = "Untitled.py"
             data["extension"] = "py - python"
-            firebase_api.add_new_user(data["uid"], data["name"])
+            firebase_api.add_new_user(data["uid"], data["name"], data["email"])
             return jsonify({"status": "ok",
                             "uid": data["uid"],
                             "file_id": firebase_api.add_new_file(data)})
