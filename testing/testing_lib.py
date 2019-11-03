@@ -26,3 +26,9 @@ def addFile(uid, filename, extension):
     response = requests.post(url, data=json.dumps(payload), headers=headers)
     return response.json()['status']
 
+def removeUser(uid):
+    url = 'https://revcode.herokuapp.com/removeuser'
+    headers = {'content-type': 'application/json'}
+    payload = {'uid': str(uid)}
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+    return response.json()
