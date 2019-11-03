@@ -23,8 +23,8 @@ def add_user():
     try:
         if request.method == 'POST':
             data = request.get_json()
-            data["filename"] = "Untitled"
-            data["extension"] = ""
+            data["filename"] = "Untitled.py"
+            data["extension"] = "py - python"
             firebase_api.add_new_user(data["uid"], data["name"])
             return jsonify({"status": "ok",
                             "uid": data["uid"],
