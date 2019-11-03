@@ -1,5 +1,11 @@
-import requests
-import json
+def getFiles(uid):
+    files = []
+    url = 'https://revcode.herokuapp.com/userdata?uid='+ str(uid)
+    response = requests.get(url)
+    for i in (response.json()['userData']['user_storage']):
+        files.append(i['filename'])
+    return files
+
 
 def addUser(name, uid):
     url = 'https://revcode.herokuapp.com/adduser'
