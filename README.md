@@ -11,7 +11,8 @@ backend for RevCode project
 ```json
 {
 	"name": "Wattanai s.",
-	"uid": "test_uid"
+	"uid": "test_uid",
+	"email": "testemail@mailserver.com"
 }
 ```
 
