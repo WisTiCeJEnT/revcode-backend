@@ -26,6 +26,18 @@ def addFile(uid, filename, extension):
     response = requests.post(url, data=json.dumps(payload), headers=headers)
     return response.json()['status']
 
+def saveFile(uid, file_id, code, filename, extension):
+    url = 'https://revcode.herokuapp.com/savefile'
+    headers = {'content-type': 'application/json'}
+    payload = { 'uid': str(uid),
+                'file_id': str(file_id),
+                'code': str(code),
+                'filename': str(filename),
+                'extension': str(extension)
+                }
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+    return response.json()['status']
+
 def removeFile(uid, file_id):
     url = 'https://revcode.herokuapp.com/removefile'
     headers = {'content-type': 'application/json'}
@@ -39,4 +51,3 @@ def removeUser(uid):
     payload = {'uid': str(uid)}
     response = requests.post(url, data=json.dumps(payload), headers=headers)
     return response.json()['status']
-
