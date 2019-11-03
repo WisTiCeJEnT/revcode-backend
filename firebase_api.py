@@ -80,6 +80,10 @@ def remove_file(uid, file_id):
   USER.child(uid).child("user_storage").child(file_id).delete()
   return file_id
 
+def remove_user(uid):
+  USER.child(uid).delete()
+  return uid
+
 def load_carefulword():
     return CONSTANT.get()
   

@@ -90,6 +90,16 @@ def user_remove_file():
         print("Error:", e)
         return jsonify({"status": "error"})
 
+@app.route('/removeuser', methods = ['POST'])
+def remove_user():
+    try:
+        data = request.json
+        return jsonify({"status": "ok",
+                        "uid": firebase_api.remove_user(data["uid"])})
+    except Exception as e: 
+        print("Error:", e)
+        return jsonify({"status": "error"})
+
 @app.route('/speech', methods = ['GET', 'POST'])
 def getSpeech():
     try:
