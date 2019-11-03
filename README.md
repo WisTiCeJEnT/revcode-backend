@@ -41,10 +41,18 @@ backend for RevCode project
 ```
 
 * POST remove file
-	* /remove file
+	* /removefile
 ```json
 {
 	"uid": "cidCuqVCQ5OKf26IAGjKRr8mLA82",
 	"file_id": "-LqbdD_0LnDR7QH7OeWy"
+}
+```
+
+* POST remove user
+	* /removeuser
+```json
+{
+	"uid": "cidCuqVCQ5OKf26IAGjKRr8mLA82",
 }
 ```
