@@ -1,19 +1,30 @@
 import unittest
 import requests
-from mult import multiply
+import json
+import testing_lib
 class Testmultiply(unittest.TestCase):
+   
     def setUp(self):
         pass
-    def test_GET_user_data(self):
-        res = requests.get("https://revcode.herokuapp.com/userdata?uid=cidCuqVCQ5OKf26IAGjKRr8mLA82")
-        txt = res.json()
-        for i in txt:
-            print(i)
-        self.assertEqual(res.text,'Woring')
- #   def test_numbers_3_4(self):
-  #      self.assertEqual(multiply(3,4),4)
-   # def test_strings_a_3(self):
-    #    self.assertEqual( multiply(4,3), 4)
+    def test_register(self):
+        username=input("Username : ")
+        uid=input("UID : ")
+        email=input("Email : ")
+    
+        response = testing_lib.addUser(username,uid,email)
+        self.assertEqual(response,'ok')
+    '''
+    def test_addfile(self):
+        response = testing_lib.addFile("f0rtest_0nly","Testfile.py","py")
+        self.assertEqual(response,'ok')
+    def test_getallfiles(self):
+        response = testing_lib.getFiles("f0rtest_0nly")
+        print("All files : "+str(response))
+      #  self.assertEqual(response,'ok')
+    def test_save_file(self):
+        response = testing_lib.saveFile()
+    '''
+
 
 if __name__ == '__main__':
     unittest.main()
