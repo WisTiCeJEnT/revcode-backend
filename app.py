@@ -23,12 +23,15 @@ def add_user():
     try:
         if request.method == 'POST':
             data = request.get_json()
-            data["filename"] = "Untitled.py"
-            data["extension"] = "py - python"
+            data["filename"] = "HowTo.txt"
+            data["extension"] = "txt - Text file"
+            data["code"] = ['', '### File Handling ###', '#1.Create new file on add button', '#2.Choose your file to edit', '#3.Edit your file', '#4.Save file on save button', '#5.Delete file on delete button ', '#\t( Note that your file will be removed permanently )', '', '### Speech Feature ###', '#1.Click or press on microphone button to turn this feature on', '#2.You must to allow browser to access your microphone', '#3.Speak your code', '#4.RevCode will process your speech and generate it into real code', '#5.Turn this feature off by clicking on microphone button again', '', '### Enjoy Coding ### ', '']
             firebase_api.add_new_user(data["uid"], data["name"], data["email"])
+            file_id = firebase_api.add_new_file(data)
+            firebase_api.save_file(data["uid"], file_id, data)
             return jsonify({"status": "ok",
                             "uid": data["uid"],
-                            "file_id": firebase_api.add_new_file(data)})
+                            "file_id": file_id})
     except Exception as e: 
         print("Error:", e)
         traceback.print_exc()
