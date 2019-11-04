@@ -1,7 +1,7 @@
 import unittest
 import requests
 import json
-import testing_lib
+from testing_lib import *
 class Testmultiply(unittest.TestCase):
 
     def setUp(self):
@@ -12,19 +12,35 @@ class Testmultiply(unittest.TestCase):
         email="Juitanya@hotmail.com"
         print('Registering ...')
 
-        response = testing_lib.addUser(username,uid,email)
+        response = addUser(username,uid,email)
         self.assertEqual(response,'ok')
 
         filename = "Test.py"
         extension = "py"
         print('Creating file...')
 
-        response = testing_lib.addFile(uid,filename,extension)
+        response = addFile(uid,filename,extension)
         self.assertEqual(response,'ok')
 
-        testing_lib.removeUser("0k_this_is_for_test_only")
+        removeUser("0k_this_is_for_test_only")
     
+    def test_create_read_delete_read(self):
+        print('Adding File ...')
+        response = addFile('testerid01', 'testfile002.py', 'py')
+        self.assertEqual(response,'ok')
 
+        print('Getting Files ...')
+        response = getFiles("testerid01")
+        self.assertEqual(response, ['testfile002.py', 'testfile.py', 'testfile001.py'])
 
+        print('Removing Files ...')
+        response = removeFile('testerid01', '-LsprOfW6dQrFLdq-dEu')
+        self.assertEqual(response,'ok')
+
+        print('Getting Files ...')
+        response = getFiles("testerid01")
+        self.assertEqual(response, ['testfile002.py', 'testfile.py'])
+
+        print('Finished')
 if __name__ == '__main__':
     unittest.main()
