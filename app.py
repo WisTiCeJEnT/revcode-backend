@@ -31,6 +31,7 @@ def add_user():
                             "file_id": firebase_api.add_new_file(data)})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 @app.route('/userdata', methods = ['GET'])
@@ -43,6 +44,7 @@ def get_user_data():
                             "userData": firebase_api.get_user_data(uid)})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 @app.route('/loadfile', methods = ['GET'])
@@ -55,6 +57,7 @@ def user_load_file():
                         "file_data": firebase_api.get_file(uid, file_id)})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 @app.route('/newfile', methods = ['POST'])
@@ -66,6 +69,7 @@ def user_add_new_file():
                         "file_id": firebase_api.add_new_file(data)})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
         
 @app.route('/savefile', methods = ['POST'])
@@ -77,6 +81,7 @@ def user_save_file():
                         "file_id": firebase_api.save_file(data["uid"], data["file_id"], data)})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 @app.route('/removefile', methods = ['POST'])
@@ -98,6 +103,7 @@ def remove_user():
                         "uid": firebase_api.remove_user(data["uid"])})
     except Exception as e: 
         print("Error:", e)
+        traceback.print_exc()
         return jsonify({"status": "error"})
 
 @app.route('/speech', methods = ['GET', 'POST'])
