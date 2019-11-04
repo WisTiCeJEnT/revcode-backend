@@ -1,7 +1,7 @@
 import datetime
 import os
 import firebase_admin
-from firebase_admin import db
+from firebase_admin import db, auth
 
 def add_new_user(uid, name, email):
   if(uid not in USER.get().keys()):
@@ -83,6 +83,10 @@ def remove_file(uid, file_id):
 
 def remove_user(uid):
   USER.child(uid).delete()
+  try:
+    auth.delete_user(uid)
+  except:
+    print("Can't delete user from firebase auth")
   return uid
 
 def load_carefulword():
