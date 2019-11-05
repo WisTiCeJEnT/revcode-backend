@@ -23,10 +23,10 @@ def tran(i, tab):
         if ('ตัวแปร' in i) :
             order0=i.index('ตัวแปร')
             answer+=f'{i[order0+1]} '
-            if(('ใน' and 'ช่วง') in i):
+            if('ใน' and 'ช่วง' in i):
                 order1=i.index('ช่วง')
                 answer+=f'in range({i[order1+1]},{i[order1+3]})'
-            if(('ตั้งแต่' in i):
+            elif('ตั้งแต่' in i):
                 order1=i.index('ตั้งแต่')
                 answer+=f'in range({i[order1+1]},{i[order1+3]})'
             elif('ใน' in i):
@@ -124,6 +124,7 @@ def tran(i, tab):
                     if(i[n]=='ตัวแปร'):
                         continue
                     answer+=f'{i[n]} '
+
     return (answer, tab)
 """
 tab=0
