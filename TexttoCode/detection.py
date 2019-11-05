@@ -19,7 +19,8 @@ def tran(i, tab):
                 answer+=f'in range({i[order1+1]},{i[order1+3]})'
             elif('ใน' in i):
                 order1=i.index('ใน')
-                answer+=f'in {i[order1+1]}'
+                for n in range(order1+1,len(i)):  
+                    answer+=f'in {i[n]}'
         answer+=f':' 
         
     if(('if'  in i) or ('elif'  in i) or ('while' in i)) : ## if       
