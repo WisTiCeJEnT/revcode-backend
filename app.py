@@ -117,6 +117,8 @@ def getSpeech():
             text = data["raw_text"]
             current_indent = firebase_api.get_indent(data["uid"], data["file_id"], data["line_no"])
             revcode, new_indent, just_cut, before_detext = grammar.grammar(text, current_indent)
+            if(revcode.isspace()):
+                revcode = ""
             firebase_api.set_indent(data["uid"], data["file_id"], data["line_no"], new_indent, revcode)
             print(json.dumps({"status": "ok",
                             "before_text": text,
