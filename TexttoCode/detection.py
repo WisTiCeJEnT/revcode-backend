@@ -2,10 +2,10 @@ def tran(i, tab):
     answer='\t'*tab  
     if('ข้างใน' in i):
         tab+=1
-        return (None, tab)
+        return ('', tab)
     if('ข้างนอก' in i):
         tab-=1
-        return (None, tab)
+        return ('', tab)
     if ('for' in i) : ## for
         answer+=f'for '
         if ('ตัวแปร' in i) :
