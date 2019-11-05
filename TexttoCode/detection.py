@@ -26,6 +26,9 @@ def tran(i, tab):
             if(('ใน' and 'ช่วง') in i):
                 order1=i.index('ช่วง')
                 answer+=f'in range({i[order1+1]},{i[order1+3]})'
+            if(('ตั้งแต่' in i):
+                order1=i.index('ตั้งแต่')
+                answer+=f'in range({i[order1+1]},{i[order1+3]})'
             elif('ใน' in i):
                 order1=i.index('ใน')
                 answer+=f'in {i[order1+1]}'
@@ -41,10 +44,10 @@ def tran(i, tab):
         if ('ตัวแปร' in i) :
             order0=i.index('ตัวแปร')
             answer+=f'{i[order0+1]} '
-            if('มากกว่า' in i):
-                order1=i.index('มากกว่า')
+            if('>' in i):
+                order1=i.index('>')
                 answer+=f'>'
-                if(i[order1+1] == 'เท่ากับ'):                   
+                if(i[order1+1] == '='):                   
                     answer+=f'='
                 else:
                     answer+=f' {i[order1+1]}'
@@ -53,20 +56,20 @@ def tran(i, tab):
                     for n in range(order1+2,len(i)):  
                         if(i[n]=='ตัวแปร'):
                             continue
-                        if(i[n]=='น้อยกว่า'):
+                        if(i[n]=='<'):
                             answer+=f'<'
                             continue
-                        elif(i[n]=='มากกว่า'):
+                        elif(i[n]=='>'):
                             answer+=f'>'
                             continue
-                        if(i[n]=='เท่ากับ'):
+                        if(i[n]=='='):
                             answer+=f'='
                             continue
                         answer+=f' {i[n]} '
-            elif('น้อยกว่า' in i):
-                order1=i.index('น้อยกว่า')
+            elif('<' in i):
+                order1=i.index('<')
                 answer+=f'<'
-                if(i[order1+1] == 'เท่ากับ'):
+                if(i[order1+1] == '='):
                     answer+=f'='
                 else:
                     answer+=f'{i[order1+1]}'
@@ -75,19 +78,19 @@ def tran(i, tab):
                     for n in range(order1+2,len(i)):  
                         if(i[n]=='ตัวแปร'):
                             continue
-                        if(i[n]=='น้อยกว่า'):
+                        if(i[n]=='<'):
                             answer+=f'<'
                             continue
-                        elif(i[n]=='มากกว่า'):
+                        elif(i[n]=='>'):
                             answer+=f'>'
                             continue
-                        if(i[n]=='เท่ากับ'):
+                        if(i[n]=='='):
                             answer+=f'='
                             continue
                         answer+=f' {i[n]} '
                 
-            elif('เท่ากับ' in i):
-                order1=i.index('เท่ากับ')
+            elif('=' in i):
+                order1=i.index('=')
                 answer+=f'== '
                 for n in range(order1+1,len(i)):  
                     if(i[n]=='ตัวแปร'):
