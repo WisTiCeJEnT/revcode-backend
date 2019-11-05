@@ -1,11 +1,24 @@
+mylist=[['while','ตัวแปร','กาก','=','10000'],['ข้างใน'],['print','ข้อความ', 'x'],
+['for','ตัวแปร','i','ในช่วง','1','ถึง','9'],
+['ข้างใน'],
+['print','ข้อความ','ควายกัดหมา'],
+['ตัวแปร','x' ,'เท่ากับ','x','*','9'],
+['ข้างนอก'],['elif','ตัวแปร','x','=','1'],
+['ข้างใน'],['print','ตัวแปร','x+1'],['ข้างนอก'],
+['print','ตัวแปร', 'x'],
+['ประกาศ','ตัวแปร','x' ,'เท่ากับ','ตัวแปร','y','+','ตัวแปร','z','+','1']]
 def tran(i, tab):
     answer='\t'*tab  
     if('ข้างใน' in i):
         tab+=1
-        return ('', tab)
+        return (None, tab)
     if('ข้างนอก' in i):
         tab-=1
-        return ('', tab)
+        return (None, max(0,tab) )
+    if('break' in i):
+        answer+=f'break'
+    if('continue' in i):
+        answer+=f'continue'
     if ('for' in i) : ## for
         answer+=f'for '
         if ('ตัวแปร' in i) :
@@ -21,13 +34,15 @@ def tran(i, tab):
                 order1=i.index('ใน')
                 for n in range(order1+1,len(i)):  
                     answer+=f'in {i[n]}'
-        answer+=f':' 
+        answer+=f' :' 
         
-    if(('if'  in i) or ('elif'  in i) or ('while' in i)) : ## if       
+    if(('if'  in i) or ('elif'  in i) or ('while' in i) or ('else' in i))  : ## if       
         if('if' in i ):
             answer+=f'if '
         if('elif' in i):
             answer+=f'elif '
+        if('else' in i):
+            answer+=f'else '   
         if('while' in i):
             answer+=f'while '
         if ('ตัวแปร' in i) :
@@ -113,9 +128,7 @@ def tran(i, tab):
                     if(i[n]=='ตัวแปร'):
                         continue
                     answer+=f'{i[n]}'
-
     return (answer, tab)
-"""
 tab=0
 listans=[]
 for i in mylist:
@@ -125,4 +138,3 @@ for i in mylist:
 for i in listans:
     if i:
         print(i)
-"""
