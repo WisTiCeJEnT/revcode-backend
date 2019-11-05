@@ -11,10 +11,10 @@ def tran(i, tab):
     answer='\t'*tab  
     if('ข้างใน' in i):
         tab+=1
-        return (None, tab)
+        return ("    ", tab)
     if('ข้างนอก' in i):
         tab-=1
-        return (None, max(0,tab) )
+        return ("", max(0,tab) )
     if('break' in i):
         answer+=f'break'
     if('continue' in i):
