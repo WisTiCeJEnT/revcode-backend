@@ -5,9 +5,7 @@ def getFiles(uid):
     files = []
     urllocal = url+'/userdata?uid='+ str(uid)
     response = requests.get(urllocal)
-    for i in (response.json()['userData']['user_storage']):
-        files.append(i['filename'])
-    return files
+    return response.json()['status']
 
 def addUser(name, uid, email):
     urllocal =url+'/adduser'
