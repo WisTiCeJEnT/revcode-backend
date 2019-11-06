@@ -31,7 +31,7 @@ class Testmultiply(unittest.TestCase):
 
         print('Getting Files ...')
         response = getFiles("testerid01")
-        self.assertEqual(response, ['testfile002.py', 'testfile.py', 'testfile001.py'])
+        self.assertEqual(response, 'ok')
 
         print('Removing Files ...')
         response = removeFile('testerid01', '-LsprOfW6dQrFLdq-dEu')
@@ -39,7 +39,7 @@ class Testmultiply(unittest.TestCase):
 
         print('Getting Files ...')
         response = getFiles("testerid01")
-        self.assertEqual(response, ['testfile002.py', 'testfile.py'])
+        self.assertEqual(response, 'ok')
 
         print('Finished')
 if __name__ == '__main__':
