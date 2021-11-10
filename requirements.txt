@@ -12,4 +12,4 @@ dialogflow==0.4.0
 
 #grammar part
 -e git+https://github.com/WisTiCeJEnT/deepcut.git@dc814fa621a4ea0c80cb2b66e26766edba0bd355#egg=deepcut
-tensorflow==1.14.0
+tensorflow==2.5.2
